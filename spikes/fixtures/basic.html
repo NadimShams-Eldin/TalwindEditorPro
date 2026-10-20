@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Fixture</title>
+  <!-- keep this comment -->
+  <style>
+    .card { color: red; }
+  </style>
+</head>
+<body>
+  <header class="site-header" data-kind=nav>
+    <nav>
+      <a href="/" class='active'>Home</a>
+      <a href="/about">About</a>
+    </nav>
+  </header>
+
+  <main>
+    <section id="hero" class="hero  mx-auto" style="max-width: 72rem">
+      <h1 class="text-4xl font-bold">Hello <span>world</span></h1>
+      <p class="mt-4 text-gray-600">
+        A paragraph with <strong>inline</strong> markup and a <a href="#">link</a>.
+      </p>
+      <img src="/hero.png" alt="Hero" width="800" height="600">
+      <br>
+      <hr />
+    </section>
+
+    <section class="grid">
+      <article class="card p-4">
+        <h2>Card one</h2>
+        <pre>
+  keep   this
+    spacing
+        </pre>
+      </article>
+      <article class="card p-4">
+        <svg viewBox="0 0 10 10"><path d="M0 0 L10 10" /></svg>
+      </article>
+    </section>
+  </main>
+
+  <script>
+    const template = "<div class='p-4'>inside string</div>";
+    document.querySelectorAll(".card").forEach((el) => el.dataset.ready = "1");
+  </script>
+</body>
+</html>

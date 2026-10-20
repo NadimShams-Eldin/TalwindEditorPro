@@ -1,0 +1,18 @@
+{
+  "name": "tep-spikes",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Technical spikes for HTML surgical editing, Tailwind compilation and preview CSS swap",
+  "scripts": {
+    "test": "node --test test/*.test.mjs",
+    "bench": "node bench/run.mjs"
+  },
+  "license": "UNLICENSED",
+  "dependencies": {
+    "@tailwindcss/node": "4.3.3",
+    "linkedom": "0.18.13",
+    "parse5": "8.0.1",
+    "tailwindcss": "4.3.3"
+  }
+}
