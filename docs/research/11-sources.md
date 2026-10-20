@@ -84,7 +84,56 @@
 | [Installation](https://tailwindcss.com/docs/installation) | CLI/PostCSS/Vite (صفحة JS-heavy، استُخدمت جزئيًا) |
 | [Optimizing for production](https://tailwindcss.com/docs/optimizing-for-production) | تقليل الحجم (صفحة JS-heavy، استُخدمت جزئيًا) |
 
-## 3. المنافسون
+## 3. أدلة المستخدمين
+
+### 3.1 منتدى Pinegrow
+
+مواضيع استُخدمت كأدلة على موانع محددة (التفاصيل في `appendices/evidence-log.csv`):
+
+| الموضوع | المحور |
+|---|---|
+| [8294](https://forum.pinegrow.com/t/8294) | لون مخصص لا يظهر في Class Tree |
+| [8389](https://forum.pinegrow.com/t/8389) | لا cut/paste للأصناف |
+| [11431](https://forum.pinegrow.com/t/11431) | غموض أدوات responsive |
+| [4336](https://forum.pinegrow.com/t/4336) | صعوبة نموذج المكونات/Master Pages |
+| [1928](https://forum.pinegrow.com/t/1928) | تعذر العثور على تعريف المكوّن |
+| [5119](https://forum.pinegrow.com/t/5119) | هل توجد مكونات حية؟ |
+| [5969](https://forum.pinegrow.com/t/5969) | كتابة CSS مولّد داخل مكتبة خارجية |
+| [6344](https://forum.pinegrow.com/t/6344) | البناء الخارجي لا يعمل تلقائيًا |
+| [6371](https://forum.pinegrow.com/t/6371) | pseudo-classes ناقصة (group/peer) |
+| [7491](https://forum.pinegrow.com/t/7491) | كشف Tailwind عبر اسم الملف |
+| [8766](https://forum.pinegrow.com/t/8766) | ملفات البناء والتصدير للثيم |
+| [8961](https://forum.pinegrow.com/t/8961) | عدم تحديث الأنماط تلقائيًا في Vue |
+| [10061](https://forum.pinegrow.com/t/10061) | إضافة Pinegrow للبناء الخارجي |
+| [7634](https://forum.pinegrow.com/t/7634) | مسار خط محلي خاطئ |
+
+### 3.2 Stack Overflow
+
+استُخدمت واجهة Stack Exchange API للبحث عن أسئلة Tailwind عالية التصويت:
+
+```text
+https://api.stackexchange.com/2.3/search/advanced?order=desc&sort=votes&q=tailwind%20class&site=stackoverflow&pagesize=15
+```
+
+أبرز الإشارات:
+
+- "How to build dynamically class names with Tailwind CSS" (105 تصويت، 20 إجابة).
+- "Tailwind CSS v3 classes is not working in my project" (59 تصويت، 46 إجابة).
+- "Force Tailwind to include some classes in build phase".
+- "Make Tailwind Classes non-Global".
+
+### 3.3 GitHub Issues
+
+| القضية | المحور |
+|---|---|
+| [tailwindlabs/tailwindcss#3941](https://github.com/tailwindlabs/tailwindcss/issues/3941) | الأصناف الديناميكية/المتداخلة |
+| [tailwindlabs/tailwindcss#18136](https://github.com/tailwindlabs/tailwindcss/issues/18136) | أصناف v4 الديناميكية من بيانات الخادم |
+| [tailwindlabs/tailwindcss#20400](https://github.com/tailwindlabs/tailwindcss/issues/20400) | توليد ديناميكي مع clsx |
+| [tailwindlabs/tailwindcss#14209](https://github.com/tailwindlabs/tailwindcss/issues/14209) | صنف ديناميكي لا يطبق CSS |
+
+**حدود:** المنتدى يعكس مستخدمين غاضبين غالبًا، وStack Overflow لا يمثل المحترفين فقط. هذه الأدلة تثبت وجود الموانع، لا تكرارها.
+
+## 4. المنافسون
 
 لم تُجرَ جولة تنزيل منهجية لمواقع المنافسين في هذه المرحلة. المعلومات في `04-competitive-landscape.md` مصنفة `[سوق]` وتستند إلى معرفة عامة بالمنتجات، ويجب تحديثها قبل أي قرار تسعير أو تموضع نهائي.
 
@@ -105,7 +154,7 @@
 | WordPress | https://wordpress.org |
 | Astro | https://astro.build |
 
-## 4. مواضيع تحتاج مصادر إضافية
+## 5. مواضيع تحتاج مصادر إضافية
 
 | الموضوع | المصدر المقترح |
 |---|---|
@@ -117,7 +166,9 @@
 | أمان Electron | Electron security checklist |
 | ترخيص العلامة | سياسة Tailwind trademark، استشارة قانونية |
 
-## 5. خريطة الأدلة
+## 6. خريطة الأدلة
+
+> سجل الأدلة التفصيلي (EV-01..EV-22) مع الروابط في `appendices/evidence-log.csv`.
 
 | ادعاء رئيسي | المصدر | التصنيف |
 |---|---|---|
@@ -135,7 +186,7 @@
 | السوق يدفع مقابل clean export | تحليل أعمال | `[فرضية]` |
 | المنافسون لا يدعمون Tailwind بعمق | مراجعة منتجات | `[سوق]` |
 
-## 6. ملاحظات على جودة المصادر
+## 7. ملاحظات على جودة المصادر
 
 1. وثائق Pinegrow تصف النية والقدرات، وليست تقييمًا مستقلًا.
 2. بعض صفحات Tailwind تعتمد على JS ولم تُستخرج بالكامل؛ التفاصيل الدقيقة للـ API تحتاج مراجعة عند التنفيذ.
@@ -143,7 +194,7 @@
 4. أسعار المنافسين سريعة التغير؛ لا تُعتمد أرقام قديمة.
 5. لا يوجد فحص للكود المصدري لـ Pinegrow أو Tailwind internals؛ الاستنتاجات معمارية.
 
-## 7. إعادة التحقق
+## 8. إعادة التحقق
 
 قبل بدء Phase 1:
 

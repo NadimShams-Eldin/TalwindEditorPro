@@ -1,0 +1,23 @@
+ID,Source,Thread/Topic,Date accessed,Evidence type,Observation,Blocker,Confidence,URL
+EV-01,Pinegrow forum,8294,2026-10-20,User report,"Custom Tailwind colour does not appear in the Class Tree after being added to the config","B-06",High,https://forum.pinegrow.com/t/8294
+EV-02,Pinegrow forum,8389,2026-10-20,User request,"Cut and paste of classes inside the Class Tree is not supported; only copy is available","B-02",High,https://forum.pinegrow.com/t/8389
+EV-03,Pinegrow forum,11431,2026-10-20,User report,"Responsive inspector breakpoint behaviour was confusing after multiple attempts; tutorial and UI did not match","B-04",High,https://forum.pinegrow.com/t/11431
+EV-04,Pinegrow forum,4336,2026-10-20,User report,"After almost a year of use, components and master pages relationship still unclear","B-05",High,https://forum.pinegrow.com/t/4336
+EV-05,Pinegrow forum,1928,2026-10-20,User question,"User could not locate the definition of an existing component instance","B-05",High,https://forum.pinegrow.com/t/1928
+EV-06,Pinegrow forum,5119,2026-10-20,User question,"User unsure whether live components that update all pages exist","B-05",Medium,https://forum.pinegrow.com/t/5119
+EV-07,Pinegrow forum,6344,2026-10-20,Official reply,"External Tailwind build is entirely user-controlled; Pinegrow cannot trigger it automatically","B-07",High,https://forum.pinegrow.com/t/6344
+EV-08,Pinegrow forum,5969,2026-10-20,User report,"Design panel writes generated CSS into the external library tailwind.css","B-07",High,https://forum.pinegrow.com/t/5969
+EV-09,Pinegrow forum,6371,2026-10-20,User request,"Missing Tailwind pseudo-classes such as group and peer in the UI","B-15",High,https://forum.pinegrow.com/t/6371
+EV-10,Pinegrow forum,7491,2026-10-20,Official reply,"Tailwind detection relies on a stylesheet filename containing tailwind, failing for wrappers and custom names","B-15",High,https://forum.pinegrow.com/t/7491
+EV-11,Pinegrow forum,8766,2026-10-20,Community answer,"Unclear which external build files should be exported to a WordPress theme","B-07",High,https://forum.pinegrow.com/t/8766
+EV-12,Pinegrow forum,8961,2026-10-20,User report,"Tailwind style edits in a Vue/Nuxt project did not refresh automatically; manual Alt+S needed","B-08",High,https://forum.pinegrow.com/t/8961
+EV-13,Pinegrow forum,10061,2026-10-20,Official reply,"External build recommends an extra Pinegrow plugin to match internal compiler behaviour","B-07",Medium,https://forum.pinegrow.com/t/10061
+EV-14,Pinegrow forum,7634,2026-10-20,User report,"Local font path resolved incorrectly in a Tailwind project","B-07",Medium,https://forum.pinegrow.com/t/7634
+EV-15,Stack Overflow,search tailwind class,2026-10-20,Question volume,"How to build dynamically class names with Tailwind CSS: 105 score, 20 answers","B-02",High,https://stackoverflow.com/search?q=tailwind+class
+EV-16,Stack Overflow,search tailwind class,2026-10-20,Question volume,"Tailwind CSS v3 classes not working in project: 59 score, 46 answers","B-02",High,https://stackoverflow.com/search?q=tailwind+class
+EV-17,Stack Overflow,search tailwind class,2026-10-20,Question,"Force Tailwind to include some classes in build phase","B-02",High,https://stackoverflow.com/search?q=tailwind+class
+EV-18,Stack Overflow,search tailwind conflict,2026-10-20,Question,"Make Tailwind classes non-global and resolve conflicts with other CSS frameworks","B-03",Medium,https://stackoverflow.com/search?q=tailwind+conflict
+EV-19,GitHub issue,tailwindlabs/tailwindcss#3941,2026-10-20,Official issue,"Dynamic, interpolated and concatenated class names are not detected by the scanner",B-02,High,https://github.com/tailwindlabs/tailwindcss/issues/3941
+EV-20,GitHub issue,tailwindlabs/tailwindcss#18136,2026-10-20,User report,"Tailwind v4 dynamic class names from server-side data not applied at runtime","B-02",Medium,https://github.com/tailwindlabs/tailwindcss/issues/18136
+EV-21,Tailwind docs,detecting-classes-in-source-files,2026-10-20,Official docs,"Scanner extracts complete class names as plain text; no evaluation of concatenation","B-02",High,https://tailwindcss.com/docs/detecting-classes-in-source-files
+EV-22,Tailwind docs,upgrade-guide,2026-10-20,Official docs,"v4 changes variant order, important syntax, shadow scale and arbitrary value syntax","B-03",High,https://tailwindcss.com/docs/upgrade-guide
