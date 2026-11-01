@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>متجر نور — قالب تجريبي</title>
+    <script src="./vendor/tailwind.js"></script>
+    <style type="text/tailwindcss">
+      @theme {
+        --color-brand-400: oklch(0.74 0.15 264);
+        --color-brand-500: oklch(0.62 0.19 264);
+        --color-brand-600: oklch(0.53 0.2 264);
+      }
+    </style>
+  </head>
+  <body class="bg-slate-950 text-slate-100 antialiased">
+    <header class="border-b border-white/10">
+      <nav class="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
+        <a href="#" class="text-lg font-bold tracking-tight text-white">نور</a>
+        <div class="flex items-center gap-6 text-sm text-slate-300">
+          <a href="#features" class="hover:text-white">الميزات</a>
+          <a href="#pricing" class="hover:text-white">الأسعار</a>
+          <a href="#faq" class="hover:text-white">الأسئلة</a>
+        </div>
+        <a href="#start" class="rounded-lg bg-brand-500 px-4 py-2 text-sm font-semibold text-white hover:bg-brand-600">
+          ابدأ الآن
+        </a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="mx-auto max-w-6xl px-6 py-20 text-center">
+        <span class="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-brand-400">
+          الإصدار 2.0 متاح
+        </span>
+        <h1 class="mx-auto mt-6 max-w-3xl text-4xl font-bold tracking-tight text-white sm:text-5xl">
+          متجرك الإلكتروني جاهز في دقائق
+        </h1>
+        <p class="mx-auto mt-4 max-w-2xl text-lg text-slate-400">
+          منصة عربية لبناء متاجر سريعة وآمنة، مع دعم كامل للدفع المحلي والفوترة الإلكترونية.
+        </p>
+        <div class="mt-8 flex flex-wrap items-center justify-center gap-3">
+          <a href="#start" class="rounded-xl bg-brand-500 px-6 py-3 font-semibold text-white hover:bg-brand-600">
+            أنشئ متجرك
+          </a>
+          <a href="#demo" class="rounded-xl border border-white/10 px-6 py-3 font-semibold text-slate-200 hover:bg-white/5">
+            شاهد العرض
+          </a>
+        </div>
+      </section>
+
+      <section id="features" class="mx-auto max-w-6xl px-6 pb-20">
+        <div class="grid gap-6 md:grid-cols-3">
+          <article class="rounded-2xl border border-white/10 bg-white/5 p-6">
+            <span class="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-brand-500/15 text-sm font-bold text-brand-400">
+              01
+            </span>
+            <h2 class="mt-4 text-lg font-semibold text-white">أداء فوري</h2>
+            <p class="mt-2 text-sm leading-7 text-slate-400">
+              صفحات تُبنى مسبقًا وتُقدَّم من شبكة توزيع عالمية قريبة من عميلك.
+            </p>
+          </article>
+          <article class="rounded-2xl border border-white/10 bg-white/5 p-6">
+            <span class="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-brand-500/15 text-sm font-bold text-brand-400">
+              02
+            </span>
+            <h2 class="mt-4 text-lg font-semibold text-white">دفع محلي</h2>
+            <p class="mt-2 text-sm leading-7 text-slate-400">
+              مدى، فيزا، وآبل باي مع تسوية تلقائية وتقارير مالية واضحة.
+            </p>
+          </article>
+          <article class="rounded-2xl border border-white/10 bg-white/5 p-6">
+            <span class="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-brand-500/15 text-sm font-bold text-brand-400">
+              03
+            </span>
+            <h2 class="mt-4 text-lg font-semibold text-white">تحكم كامل</h2>
+            <p class="mt-2 text-sm leading-7 text-slate-400">
+              كود HTML مملوك لك بالكامل، بلا قفل تقني ولا اشتراك إجباري.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section id="pricing" class="border-y border-white/10 bg-white/[0.02]">
+        <div class="mx-auto grid max-w-6xl gap-6 px-6 py-16 md:grid-cols-2">
+          <div>
+            <h2 class="text-2xl font-bold tracking-tight text-white">سعر واحد واضح</h2>
+            <p class="mt-3 text-slate-400">
+              لا رسوم على المعاملات، ولا مفاجآت في الفاتورة. جرّب 14 يومًا ثم قرر.
+            </p>
+          </div>
+          <div class="rounded-2xl border border-white/10 bg-slate-900 p-6">
+            <div class="flex items-end justify-between">
+              <span class="text-sm text-slate-400">شهريًا</span>
+              <span class="text-3xl font-bold text-white tabular-nums">99 ر.س</span>
+            </div>
+            <ul class="mt-4 space-y-2 text-sm text-slate-300">
+              <li>منتجات غير محدودة</li>
+              <li>نطاق مخصص وشهادة SSL</li>
+              <li>دعم فني بالعربية</li>
+            </ul>
+            <a href="#start" class="mt-6 block rounded-xl bg-brand-500 px-5 py-3 text-center font-semibold text-white hover:bg-brand-600">
+              ابدأ التجربة
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="mx-auto max-w-6xl px-6 py-10 text-sm text-slate-500">
+      <div class="flex flex-wrap items-center justify-between gap-4">
+        <span>جميع الحقوق محفوظة — نور 2026</span>
+        <div class="flex gap-4">
+          <a href="#" class="hover:text-slate-300">الخصوصية</a>
+          <a href="#" class="hover:text-slate-300">الشروط</a>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
