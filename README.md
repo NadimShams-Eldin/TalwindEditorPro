@@ -1,20 +1,30 @@
 # TalwindEditorPro
 
-محرر HTML بصري لـ Tailwind CSS v4، مصمم ليحفظ الكود بايتيًا، ويشرح أثر كل تعديل، ويضمن أن المعاينة تطابق البناء.
+> Working title. Final naming and trademark decision: `docs/adr/0003-name-and-trademark.md`.
 
-> الاسم عامل (working title). قرار العلامة التجارية النهائي موثق في `docs/adr/0003-name-and-trademark.md` قبل المرحلة 3.
+Visual editor for static HTML + Tailwind CSS v4 that preserves source bytes.
 
-## الحالة الحالية
+محرر بصري لملفات HTML الثابتة مع Tailwind CSS v4، يحفظ الكود بايتيًا ويشرح أثر كل تعديل.
 
-| المجال | الحالة |
-|---|---|
-| دراسة المنتج والتقنيات | مكتملة — 15 مستندًا في `docs/research/` |
-| Spikes تقنية | مكتملة — 26 اختبارًا في `spikes/` |
-| الخطة التنفيذية | مكتملة — `docs/superpowers/plans/2026-10-30-talwind-editor-pro-master-plan.md` |
-| ديمو المتصفح | جاهز — `demo/` |
-| نواة الإنتاج (P0-P10) | لم تبدأ |
+## Requirements
 
-## ديمو سريع
+- Node.js 22.22 or newer
+- npm 10 or newer
+
+## Setup
+
+```bash
+npm install
+```
+
+## Verify
+
+```bash
+npm run verify
+npm run bench
+```
+
+## Demo
 
 ```bash
 cd demo
@@ -23,30 +33,26 @@ npm run build
 npm run serve
 ```
 
-افتح `http://127.0.0.1:8000/`.
+ثم افتح `http://127.0.0.1:8000/`.
 
-الديمو يجسّد الفكرة الأساسية: تحديد عنصر في المعاينة، إضافة/إزالة أصناف Tailwind، رؤية `diff` بايتي، وشرح لماذا لم يؤثر صنف ما (unknown / no effect / conflict).
+## Structure
 
-## هيكل المستودع
+- `docs/research/` — product and architecture research
+- `docs/adr/` — binding decisions
+- `docs/superpowers/plans/` — execution plans
+- `packages/` — core, framework-free modules
+- `apps/` — desktop shell and UI (from Phase 3)
+- `demo/` — browser demo of byte-faithful editing
+- `spikes/` — historical experiments, not production code
 
-```text
-demo/            ديمو المتصفح للفكرة الأساسية (محرر جراحي + كشف تعارض)
-docs/research/   دراسة المنتج والسوق والتقنيات (15 مستندًا)
-docs/superpowers/plans/   الخطة التنفيذية المرحلية (P0-P10)
-spikes/          إثباتات تقنية لـ parse5 وTailwind وHTML surgery
-```
+## Principles
 
-## الفكرة في سطر
+1. Files on disk are the source of truth.
+2. Saving never runs `parse + serialize`; only the targeted byte range changes.
+3. Every edit goes through `Command → Patch → Ledger → Verify`.
+4. The official Tailwind engine is used, never reimplemented.
+5. Exports contain no editor metadata.
 
-> `Command → Patch → Ledger → Verify` لكل تعديل، والحفظ يكتب البايتات المعدّلة فقط، ولا يعيد تسلسل DOM.
+## License
 
-## الاختبارات
-
-```bash
-cd spikes && npm test     # 26 اختبارًا
-cd demo && npm test       # 19 اختبارًا
-```
-
-## الترخيص
-
-غير محدد بعد (D-06 مغلق قبل P10). كل الحقوق محفوظة حتى ذلك الحين.
+All rights reserved. Terms pending decision D-06; see `LICENSE`.

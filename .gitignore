@@ -1,0 +1,10 @@
+node_modules/
+dist/
+out/
+coverage/
+*.log
+.DS_Store
+.tep/
+bench/results.json
+test-results/
+playwright-report/
