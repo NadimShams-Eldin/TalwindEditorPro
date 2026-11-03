@@ -4,20 +4,20 @@
 
 ## 1. سجل القرارات
 
-| ID | القرار | الخيارات | التوصية | الأولوية | الموعد |
-|---|---|---|---|---|---|
-| D-01 | شكل المنتج الأول | Desktop / Web / كلاهما | Desktop-first بـ Electron | P0 | قبل Phase 1 |
-| D-02 | نطاق الإخراج الأول | HTML static / WordPress / React / Astro | HTML static + Tailwind v4 | P0 | قبل Phase 1 |
-| D-03 | محرك Tailwind | داخلي / CLI / adapter مزدوج | adapter + CLI fallback | P0 | Phase 0 |
-| D-04 | نموذج المكونات | ملفات أصلية / runtime / custom elements | ملفات أصلية تُوسَّع وقت البناء | P0 | Phase 0 |
-| D-05 | مصدر الثيم | `@theme` / JSON / Figma | `@theme` + استيراد Figma لاحقًا | P1 | Phase 2 |
-| D-06 | الترخيص التجاري | Subscription / perpetual / hybrid | hybrid (perpetual + تحديثات) | P1 | Phase 5 |
-| D-07 | نموذج AI | سحابي / محلي / مزدوج | مزدوج مع افتراضي BYOK | P1 | Phase 4 |
-| D-08 | التصدير | ملفات مباشرة / build / كلاهما | كلاهما | P1 | Phase 3 |
-| D-09 | التعاون | محلي فقط / سحابة اختيارية / CRDT | سحابة اختيارية لاحقًا | P2 | بعد v1 |
-| D-10 | دعم RTL | تلقائي / يدوي / لاحقًا | تلقائي في v1 | P1 | Phase 4 |
-| D-11 | الاسم والعلامة | استخدام Tailwind في الاسم / اسم مستقل | اسم مستقل + إشارة وصفية | P0 | Phase 0 |
-| D-12 | منصة الإضافات | مفتوحة مبكرًا / لاحقًا / مغلقة | لاحقًا بعد v1 | P2 | بعد v1 |
+| ID | القرار | الخيارات | التوصية | الأولوية | الموعد | الحالة |
+|---|---|---|---|---|---|---|
+| D-01 | شكل المنتج الأول | Desktop / Web / كلاهما | Desktop-first بـ Electron | P0 | قبل Phase 1 | **مُعتمد** 2026-11-01 — [ADR-0001](../../adr/0001-product-form-desktop-first.md) |
+| D-02 | نطاق الإخراج الأول | HTML static / WordPress / React / Astro | HTML static + Tailwind v4 | P0 | قبل Phase 1 | **مُعتمد** 2026-11-01 — [ADR-0002](../../adr/0002-scope-static-html-tailwind4.md) |
+| D-03 | محرك Tailwind | داخلي / CLI / adapter مزدوج | adapter + CLI fallback | P0 | Phase 0 | توصية |
+| D-04 | نموذج المكونات | ملفات أصلية / runtime / custom elements | ملفات أصلية تُوسَّع وقت البناء | P0 | Phase 0 | توصية |
+| D-05 | مصدر الثيم | `@theme` / JSON / Figma | `@theme` + استيراد Figma لاحقًا | P1 | Phase 2 | توصية |
+| D-06 | الترخيص التجاري | Subscription / perpetual / hybrid | hybrid (perpetual + تحديثات) | P1 | Phase 5 | توصية |
+| D-07 | نموذج AI | سحابي / محلي / مزدوج | مزدوج مع افتراضي BYOK | P1 | Phase 4 | توصية |
+| D-08 | التصدير | ملفات مباشرة / build / كلاهما | كلاهما | P1 | Phase 3 | توصية |
+| D-09 | التعاون | محلي فقط / سحابة اختيارية / CRDT | سحابة اختيارية لاحقًا | P2 | بعد v1 | توصية |
+| D-10 | دعم RTL | تلقائي / يدوي / لاحقًا | تلقائي في v1 | P1 | Phase 4 | توصية |
+| D-11 | الاسم والعلامة | استخدام Tailwind في الاسم / اسم مستقل | اسم مستقل + إشارة وصفية | P0 | Phase 0 | **مُعتمد مبدئيًا** 2026-11-01 — [ADR-0003](../../adr/0003-name-and-trademark.md) |
+| D-12 | منصة الإضافات | مفتوحة مبكرًا / لاحقًا / مغلقة | لاحقًا بعد v1 | P2 | بعد v1 | توصية |
 
 ### تفاصيل القرارات الحرجة
 
