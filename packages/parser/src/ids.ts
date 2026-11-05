@@ -73,7 +73,9 @@ export function stripEditorIds(html: string): string {
     if (!isElement(node)) return;
     const loc = node.sourceCodeLocation?.attrs?.['data-tep-id'];
     if (!loc) return;
-    const start = /\s/.test(html[loc.startOffset - 1] ?? '') ? loc.startOffset - 1 : loc.startOffset;
+    const start = /\s/.test(html[loc.startOffset - 1] ?? '')
+      ? loc.startOffset - 1
+      : loc.startOffset;
     removals.push({ start, end: loc.endOffset });
   });
   return applyRemovals(html, removals);

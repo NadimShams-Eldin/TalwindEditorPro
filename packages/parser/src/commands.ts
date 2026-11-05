@@ -51,7 +51,12 @@ export function removeClass(html: string, editorId: string, token: string): stri
     if (!current.includes(token)) return html;
     const next = current.filter((t) => t !== token);
     if (next.length === 0) return removeAttribute(html, span.attrStart, span.attrEnd);
-    return replace(html, span.attrStart, span.attrEnd, `class="${escapeForQuote(next.join(' '), '"')}"`);
+    return replace(
+      html,
+      span.attrStart,
+      span.attrEnd,
+      `class="${escapeForQuote(next.join(' '), '"')}"`,
+    );
   }
   const value = span.value;
   const pattern = new RegExp(`(^|\\s+)${token.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}(\\s+|$)`);
@@ -93,6 +98,10 @@ export function setClasses(html: string, editorId: string, next: readonly string
   );
 }
 
-export function applyEdit(buffer: DocumentBuffer, editorId: string, next: readonly string[]): boolean {
+export function applyEdit(
+  buffer: DocumentBuffer,
+  editorId: string,
+  next: readonly string[],
+): boolean {
   return buffer.apply('class.change', (text) => setClasses(text, editorId, next));
 }
