@@ -1,0 +1,11 @@
+node_modules
+dist
+out
+coverage
+spikes
+demo
+docs
+bench/results.json
+packages/parser/test/fixtures
+package-lock.json
+*.md
