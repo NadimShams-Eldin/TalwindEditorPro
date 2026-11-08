@@ -1,7 +1,15 @@
+export type CausalMeta = {
+  id: string;
+  source: string;
+  elementId: string | null;
+  at: string;
+};
+
 export type LedgerEntry = {
   label: string;
   before: string;
   after: string;
+  meta?: CausalMeta;
 };
 
 export type DocumentBufferOptions = {
