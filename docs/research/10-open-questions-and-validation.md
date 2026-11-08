@@ -9,6 +9,7 @@
 | D-01 | شكل المنتج الأول | Desktop / Web / كلاهما | Desktop-first بـ Electron | P0 | قبل Phase 1 | **مُعتمد** 2026-11-01 — [ADR-0001](../../adr/0001-product-form-desktop-first.md) |
 | D-02 | نطاق الإخراج الأول | HTML static / WordPress / React / Astro | HTML static + Tailwind v4 | P0 | قبل Phase 1 | **مُعتمد** 2026-11-01 — [ADR-0002](../../adr/0002-scope-static-html-tailwind4.md) |
 | D-03 | محرك Tailwind | داخلي / CLI / adapter مزدوج | adapter + CLI fallback | P0 | Phase 0 | توصية |
+| D-13 | أساس مُعرِّف الموقع | `data-tep-id` / مسار بنيوي | مسار بنيوي + id جلسة | P0 | Phase 1 | **مُعتمد** 2026-11-08 — [ADR-0005](../../adr/0005-structural-paths-for-locator.md) |
 | D-04 | نموذج المكونات | ملفات أصلية / runtime / custom elements | ملفات أصلية تُوسَّع وقت البناء | P0 | Phase 0 | توصية |
 | D-05 | مصدر الثيم | `@theme` / JSON / Figma | `@theme` + استيراد Figma لاحقًا | P1 | Phase 2 | توصية |
 | D-06 | الترخيص التجاري | Subscription / perpetual / hybrid | hybrid (perpetual + تحديثات) | P1 | Phase 5 | توصية |
