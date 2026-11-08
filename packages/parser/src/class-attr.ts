@@ -54,3 +54,58 @@ export function insertPointForAttribute(html: string, element: Element): number 
   while (i > 0 && /\s/.test(html[i] ?? '')) i -= 1;
   return html[i] === '/' ? i : end - 1;
 }
+
+/**
+ * Reads the `class` attribute span from a start tag slice without reparsing the
+ * document. Used by the indexed fast path, where attribute offsets are known to
+ * live inside `[start, end)`.
+ */
+export function readClassSpanInStartTag(
+  html: string,
+  start: number,
+  end: number,
+): ClassSpan | null {
+  let i = start + 1;
+  while (i < end && !/[\s/>]/.test(html[i] ?? '')) i += 1;
+  while (i < end) {
+    while (i < end && /\s/.test(html[i] ?? '')) i += 1;
+    if (i >= end) break;
+    const ch = html[i] ?? '';
+    if (ch === '>' || ch === '/') break;
+    const nameStart = i;
+    while (i < end && !/[\s=/>]/.test(html[i] ?? '')) i += 1;
+    const name = html.slice(nameStart, i).toLowerCase();
+    while (i < end && /\s/.test(html[i] ?? '')) i += 1;
+    let valueStart = i;
+    let valueEnd = i;
+    let quote: '"' | "'" | '' = '';
+    if (html[i] === '=') {
+      i += 1;
+      while (i < end && /\s/.test(html[i] ?? '')) i += 1;
+      const first = html[i] ?? '';
+      if (first === '"' || first === "'") {
+        quote = first;
+        i += 1;
+        valueStart = i;
+        while (i < end && html[i] !== quote) i += 1;
+        valueEnd = i;
+        if (i < end) i += 1;
+      } else {
+        valueStart = i;
+        while (i < end && !/[\s>]/.test(html[i] ?? '')) i += 1;
+        valueEnd = i;
+      }
+    }
+    if (name === 'class') {
+      return {
+        attrStart: nameStart,
+        attrEnd: i,
+        valueStart,
+        valueEnd,
+        quote,
+        value: html.slice(valueStart, valueEnd),
+      };
+    }
+  }
+  return null;
+}

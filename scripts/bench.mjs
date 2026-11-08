@@ -1,5 +1,11 @@
 import fs from 'node:fs';
-import { injectEditorIds, stripEditorIds, setClasses } from '../packages/parser/src/index.ts';
+import {
+  addClassIndexed,
+  indexDocument,
+  injectEditorIds,
+  stripEditorIds,
+  setClasses,
+} from '../packages/parser/src/index.ts';
 
 function makeHtml(cards = 1000) {
   const items = Array.from(
@@ -49,6 +55,20 @@ for (const id of ids) {
   samples.push(performance.now() - start);
 }
 
+const indexedSamples = [];
+let index = indexDocument(injected.html);
+let indexedText = injected.html;
+for (let i = 0; i < ids.length; i += 1) {
+  const id = ids[i];
+  const start = performance.now();
+  const result = addClassIndexed(indexedText, index, id, `gap-${(i % 8) + 1}`);
+  indexedText = result.html;
+  index = result.index;
+  indexedSamples.push(performance.now() - start);
+}
+const indexedParsed = indexDocument(indexedText);
+const indexedDrift = indexedParsed.byId.size !== index.byId.size;
+
 const results = {
   runtime: {
     node: process.version,
@@ -62,6 +82,8 @@ const results = {
     stripMs: Number(stripMs.toFixed(2)),
     restoredExactly: restored === html,
     setClasses: stats(samples),
+    indexedEdit: stats(indexedSamples),
+    indexedDrift,
   },
 };
 
