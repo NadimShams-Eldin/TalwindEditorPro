@@ -1,0 +1,15 @@
+{
+  "name": "@tep/tailwind",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "types": "./src/index.ts",
+  "dependencies": {
+    "@tailwindcss/node": "4.3.3",
+    "tailwindcss": "4.3.3",
+    "@tep/parser": "0.0.0"
+  }
+}
