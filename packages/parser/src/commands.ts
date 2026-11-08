@@ -1,5 +1,11 @@
 import type { DocumentBuffer } from './buffer.ts';
-import { readClassSpan, escapeForQuote, insertPointForAttribute } from './class-attr.ts';
+import {
+  readClassSpan,
+  readClassSpanInStartTag,
+  escapeForQuote,
+  insertPointForAttribute,
+} from './class-attr.ts';
+import { shiftIndex, type DocumentIndex } from './index-map.ts';
 import { findElementById } from './locate.ts';
 
 function splitTokens(value: string): string[] {
@@ -104,4 +110,165 @@ export function applyEdit(
   next: readonly string[],
 ): boolean {
   return buffer.apply('class.change', (text) => setClasses(text, editorId, next));
+}
+
+export type EditResult = { html: string; edit: { start: number; end: number; text: string } };
+
+function noopEdit(html: string): EditResult {
+  return { html, edit: { start: 0, end: 0, text: '' } };
+}
+
+export function addClassWithEdit(html: string, editorId: string, token: string): EditResult {
+  const element = findElementById(html, editorId);
+  if (!element) throw new Error(`element not found: ${editorId}`);
+  if (token.length === 0) return noopEdit(html);
+  const span = readClassSpan(html, element);
+  if (!span) {
+    const at = insertPointForAttribute(html, element);
+    const text = ` class="${escapeForQuote(token, '"')}"`;
+    return { html: replace(html, at, at, text), edit: { start: at, end: at, text } };
+  }
+  const current = splitTokens(span.value);
+  if (current.includes(token)) return noopEdit(html);
+  if (span.quote === '') {
+    const next = `class="${escapeForQuote([...current, token].join(' '), '"')}"`;
+    return {
+      html: replace(html, span.attrStart, span.attrEnd, next),
+      edit: { start: span.attrStart, end: span.attrEnd, text: next },
+    };
+  }
+  const separator = span.value.length > 0 && !/\s$/.test(span.value) ? ' ' : '';
+  const text = `${separator}${token}`;
+  return {
+    html: replace(html, span.valueEnd, span.valueEnd, text),
+    edit: { start: span.valueEnd, end: span.valueEnd, text },
+  };
+}
+
+export function setClassesWithEdit(
+  html: string,
+  editorId: string,
+  next: readonly string[],
+): EditResult {
+  const element = findElementById(html, editorId);
+  if (!element) throw new Error(`element not found: ${editorId}`);
+  const value = next.filter(Boolean).join(' ');
+  const span = readClassSpan(html, element);
+  if (!span) {
+    if (!value) return noopEdit(html);
+    const at = insertPointForAttribute(html, element);
+    const text = ` class="${escapeForQuote(value, '"')}"`;
+    return { html: replace(html, at, at, text), edit: { start: at, end: at, text } };
+  }
+  if (!value) {
+    const from = /\s/.test(html[span.attrStart - 1] ?? '') ? span.attrStart - 1 : span.attrStart;
+    return {
+      html: replace(html, from, span.attrEnd, ''),
+      edit: { start: from, end: span.attrEnd, text: '' },
+    };
+  }
+  const quote = span.quote || '"';
+  const text = `class=${quote}${escapeForQuote(value, quote)}${quote}`;
+  return {
+    html: replace(html, span.attrStart, span.attrEnd, text),
+    edit: { start: span.attrStart, end: span.attrEnd, text },
+  };
+}
+
+function insertPointInStartTag(html: string, start: number, end: number): number {
+  let i = end - 2;
+  while (i > start && /\s/.test(html[i] ?? '')) i -= 1;
+  return html[i] === '/' ? i : end - 1;
+}
+
+function addClassAtIndexed(
+  html: string,
+  index: DocumentIndex,
+  editorId: string,
+  token: string,
+): EditResult {
+  const entry = index.byId.get(editorId);
+  if (!entry) throw new Error(`element not found: ${editorId}`);
+  if (token.length === 0) return noopEdit(html);
+  const span = readClassSpanInStartTag(html, entry.start, entry.end);
+  if (!span) {
+    const at = insertPointInStartTag(html, entry.start, entry.end);
+    const text = ` class="${escapeForQuote(token, '"')}"`;
+    return { html: replace(html, at, at, text), edit: { start: at, end: at, text } };
+  }
+  const current = splitTokens(span.value);
+  if (current.includes(token)) return noopEdit(html);
+  if (span.quote === '') {
+    const next = `class="${escapeForQuote([...current, token].join(' '), '"')}"`;
+    return {
+      html: replace(html, span.attrStart, span.attrEnd, next),
+      edit: { start: span.attrStart, end: span.attrEnd, text: next },
+    };
+  }
+  const separator = span.value.length > 0 && !/\s$/.test(span.value) ? ' ' : '';
+  const text = `${separator}${token}`;
+  return {
+    html: replace(html, span.valueEnd, span.valueEnd, text),
+    edit: { start: span.valueEnd, end: span.valueEnd, text },
+  };
+}
+
+function setClassesAtIndexed(
+  html: string,
+  index: DocumentIndex,
+  editorId: string,
+  next: readonly string[],
+): EditResult {
+  const entry = index.byId.get(editorId);
+  if (!entry) throw new Error(`element not found: ${editorId}`);
+  const value = next.filter(Boolean).join(' ');
+  const span = readClassSpanInStartTag(html, entry.start, entry.end);
+  if (!span) {
+    if (!value) return noopEdit(html);
+    const at = insertPointInStartTag(html, entry.start, entry.end);
+    const text = ` class="${escapeForQuote(value, '"')}"`;
+    return { html: replace(html, at, at, text), edit: { start: at, end: at, text } };
+  }
+  if (!value) {
+    const from = /\s/.test(html[span.attrStart - 1] ?? '') ? span.attrStart - 1 : span.attrStart;
+    return {
+      html: replace(html, from, span.attrEnd, ''),
+      edit: { start: from, end: span.attrEnd, text: '' },
+    };
+  }
+  const quote = span.quote || '"';
+  const text = `class=${quote}${escapeForQuote(value, quote)}${quote}`;
+  return {
+    html: replace(html, span.attrStart, span.attrEnd, text),
+    edit: { start: span.attrStart, end: span.attrEnd, text },
+  };
+}
+
+export type IndexedEditResult = EditResult & { index: DocumentIndex };
+
+export function addClassIndexed(
+  html: string,
+  index: DocumentIndex,
+  editorId: string,
+  token: string,
+): IndexedEditResult {
+  const entry = index.byId.get(editorId);
+  const result = addClassAtIndexed(html, index, editorId, token);
+  if (result.html === html || !entry) return { ...result, index };
+  const classValue = [...splitTokens(entry.classValue ?? ''), token].join(' ');
+  return { ...result, index: shiftIndex(index, result.edit, { editorId, classValue }) };
+}
+
+export function setClassesIndexed(
+  html: string,
+  index: DocumentIndex,
+  editorId: string,
+  next: readonly string[],
+): IndexedEditResult {
+  const result = setClassesAtIndexed(html, index, editorId, next);
+  const value = next.filter(Boolean).join(' ');
+  return {
+    ...result,
+    index: shiftIndex(index, result.edit, { editorId, classValue: value || null }),
+  };
 }
