@@ -62,3 +62,22 @@
 - `docs/research/05-product-strategy.md`
 - `docs/research/10-open-questions-and-validation.md` — D-02
 - `docs/superpowers/plans/2026-10-30-talwind-editor-pro-master-plan.md` — القيود العامة
+
+## Addendum (2026-11-10): قرار عدم تبنّي Silex أو GrapesJS
+
+طُرح تبنّي مشروع مفتوح المصدر لتوفير الوقت. القرار: **لا**.
+
+- **Silex** مرخّص AGPL-3.0، وهو ترخيص copyleft شبكي يُلزم نشر الكود بالكامل إذا قُدِّم المنتج كخدمة. هذا يتعارض مع D-06 (ترخيص المنتج لم يُحسم بعد) ويحصر خيارات التوزيع.
+- **Silex** مبني على GrapesJS أي أنه **يملك DOM ثم يسلسل**، وهو نقيض ADR-0004 (تحرير جراحي بايتي). تبنّيه يُلغي الميزة التقنية الأساسية ويُبطل corpus/golden/fuzz/`shiftIndex` كضمانات.
+- **GrapesJS core** مرخّص BSD-3-Clause، أي أنه مسموح تجارياً، لكن تبنّيه يغيّر هوية المنتج من «محرر HTML للمطورين» إلى «page builder» في سوق مزدحم، ويُلغي Causal Ledger بمعناه الحالي.
+
+**ما نستعيره فعلاً (مكوّنات متخصصة فقط):**
+
+| المكوّن | الترخيص | الاستخدام |
+|---|---|---|
+| `@tailwindcss/node` | MIT | مستخدم في P2 |
+| `@tailwindcss/language-server` | MIT | مرشح لاقتراحات P4 |
+| `postcss` | MIT | محلل `@theme` في P5 |
+| `chokidar` | MIT | بديل محتمل لـ `node:fs.watch` |
+
+**الشرط:** أي تبعية تُضاف يجب أن تكون MIT أو BSD أو Apache-2.0، وتُثبَّت بإصدار دقيق بلا `^`/`~`، وتُسجَّل في هذا الجدول.
