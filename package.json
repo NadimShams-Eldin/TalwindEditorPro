@@ -18,7 +18,8 @@
     "format:check": "prettier --check .",
     "bench": "node scripts/bench.mjs",
     "verify": "npm run typecheck && npm run lint && npm test",
-    "test:e2e": "playwright test"
+    "test:e2e": "playwright test",
+    "check:e2e-budget": "node scripts/check-e2e-budget.mjs"
   },
   "devDependencies": {
     "@eslint/js": "9.39.5",
