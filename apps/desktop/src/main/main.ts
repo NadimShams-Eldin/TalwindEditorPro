@@ -35,6 +35,17 @@ function registerIpc(): void {
     return { root };
   });
 
+  // Test-only escape hatch: never registered unless the harness opts in.
+  if (process.env.TEP_E2E_PROJECT_ROOT) {
+    ipcMain.handle('tep:open-direct', async (_event, raw: unknown) => {
+      const input = validate(readFileInput, raw);
+      projectRoot = process.env.TEP_E2E_PROJECT_ROOT ?? null;
+      if (!projectRoot) throw new Error('لا يوجد مشروع مفتوح');
+      session = await createSession(createNodeFs(projectRoot), input.path);
+      return { path: session.path, text: session.text };
+    });
+  }
+
   ipcMain.handle('tep:open', async (_event, raw: unknown) => {
     const input = validate(readFileInput, raw);
     if (!projectRoot) throw new Error('لا يوجد مشروع مفتوح');

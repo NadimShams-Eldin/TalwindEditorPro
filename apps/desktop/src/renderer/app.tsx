@@ -1,7 +1,9 @@
 import { useCallback, useEffect, useMemo, useRef, useState, type JSX } from 'react';
 import { createFallbackApi } from './fallback-api.ts';
 
-type Api = ReturnType<typeof createFallbackApi>;
+import type { RendererApi } from './fallback-api.ts';
+
+type Api = RendererApi;
 
 declare global {
   interface Window {
@@ -41,13 +43,36 @@ export function App(): JSX.Element {
     return () => window.removeEventListener('message', onMessage);
   }, []);
 
+  const openPath = useCallback(
+    async (target: string) => {
+      const opened = await api.open(target);
+      setPath(opened.path);
+      setText(opened.text);
+      setStatus('تم الفتح');
+    },
+    [api],
+  );
+
   const openProject = useCallback(async () => {
     await api.pickProject();
-    const opened = await api.open('index.html');
-    setPath(opened.path);
-    setText(opened.text);
-    setStatus('تم الفتح');
-  }, [api]);
+    await openPath('index.html');
+  }, [api, openPath]);
+
+  // Test-only hook: registered only when the harness injected `openDirect`.
+  const openDirect = api.openDirect;
+  useEffect(() => {
+    if (!openDirect) return;
+    const hook = async (target: string) => {
+      const opened = await openDirect(target);
+      setPath(opened.path);
+      setText(opened.text);
+      setStatus('تم الفتح');
+    };
+    (window as { __tepTestOpen?: (target: string) => Promise<void> }).__tepTestOpen = hook;
+    return () => {
+      delete (window as { __tepTestOpen?: unknown }).__tepTestOpen;
+    };
+  }, [openDirect]);
 
   const applyClass = useCallback(async () => {
     const id = elementId ?? 'e1';

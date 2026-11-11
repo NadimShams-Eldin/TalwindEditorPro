@@ -16,6 +16,7 @@ const SAMPLE = `<!doctype html>
 export type RendererApi = {
   pickProject(): Promise<{ root: string } | null>;
   open(path: string): Promise<{ path: string; text: string }>;
+  openDirect?(path: string): Promise<{ path: string; text: string }>;
   applyClass(input: {
     path: string;
     elementId: string;

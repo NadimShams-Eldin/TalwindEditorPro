@@ -3,6 +3,7 @@ import { contextBridge, ipcRenderer } from 'electron';
 export type TepApi = {
   pickProject(): Promise<{ root: string } | null>;
   open(path: string): Promise<{ path: string; text: string }>;
+  openDirect?(path: string): Promise<{ path: string; text: string }>;
   applyClass(input: {
     path: string;
     elementId: string;
@@ -18,6 +19,7 @@ export type TepApi = {
 const api: TepApi = {
   pickProject: () => ipcRenderer.invoke('tep:pick-project'),
   open: (path) => ipcRenderer.invoke('tep:open', { path }),
+  openDirect: (path) => ipcRenderer.invoke('tep:open-direct', { path }),
   applyClass: (input) => ipcRenderer.invoke('tep:applyClass', input),
   save: () => ipcRenderer.invoke('tep:save'),
   undo: () => ipcRenderer.invoke('tep:undo'),
