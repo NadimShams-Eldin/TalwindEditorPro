@@ -6,12 +6,20 @@ Visual editor for static HTML + Tailwind CSS v4 that preserves source bytes.
 
 ## Requirements
 
-Node.js 22.22+ and npm 10+. Then:
+Node.js 22.22+ and npm 10+.
 
 ```bash
 npm install
 npm run verify
 npm run bench && node scripts/check-budget.mjs
+```
+
+Browser and desktop gates:
+
+```bash
+npx playwright install chromium
+npm run test:e2e && npm run check:e2e-budget
+npm run build --workspace @tep/desktop
 ```
 
 ## Demo
@@ -24,7 +32,7 @@ Open `http://127.0.0.1:8000/`.
 
 ## Structure
 
-`docs/` research, ADRs, plans · `packages/` core modules · `apps/` desktop shell (Phase 3) · `demo/` editing demo · `spikes/` historical experiments.
+`docs/` research, ADRs, plans · `packages/` core modules (`parser`, `tailwind`, `contracts`, `fs`, `preview`, `editor`) · `apps/desktop` Electron shell · `e2e/` Playwright journeys · `demo/` editing demo · `spikes/` historical experiments.
 
 ## Principles
 
