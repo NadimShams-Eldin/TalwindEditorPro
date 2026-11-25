@@ -43,9 +43,14 @@ async function fetchProject(): Promise<{ files: Map<string, string>; pages: stri
   } catch {
     pages = [];
   }
-  for (const page of pages) {
-    const response = await fetch(page, { cache: 'no-store' });
-    if (response.ok) files.set(page, await response.text());
+  const loaded = await Promise.all(
+    pages.map(async (page) => {
+      const response = await fetch(page, { cache: 'no-store' });
+      return response.ok ? ([page, await response.text()] as const) : null;
+    }),
+  );
+  for (const entry of loaded) {
+    if (entry) files.set(entry[0], entry[1]);
   }
   return { files, pages };
 }
